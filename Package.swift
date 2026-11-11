@@ -24,10 +24,9 @@ let package = Package(
         )
     ],
     dependencies: [
-        // RC pin, not the final form. JMapiOSSDK 6.0.0 is not tagged yet, and an SPM range
-        // requirement such as `from:` never matches a prerelease. Flip this to
-        // `from: "6.0.0"` once JMap-iOS-SDK-Pod tags 6.0.0, before this branch merges.
-        .package(url: "https://github.com/Jibestream/JMap-iOS-SDK-Pod.git", exact: "6.0.0-rc1")
+        // A range, not `exact:`. An exact pin here makes the dependency graph
+        // unsatisfiable for any consumer that declares its own JMapiOSSDK requirement.
+        .package(url: "https://github.com/Jibestream/JMap-iOS-SDK-Pod.git", from: "6.0.0")
     ],
     targets: [
         // Static Objective-C framework containing no Objective-C categories of its own, so it
